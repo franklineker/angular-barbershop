@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  background-color: black;
+  margin: 0
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+app-root {
+  display: grid;
+  grid-template-areas:
+    "app-header"
+    "app-main"
+    "app-footer"
+
+}
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.color-white {
+  color: white;
+}
+
+.myYellow {
+  color: #FFCE2E;
+}
+
+.text-justify {
+  text-align: justify;
+}

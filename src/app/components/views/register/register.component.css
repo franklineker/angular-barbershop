@@ -1,0 +1,77 @@
+* {
+    color: white;
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 590px;
+    align-items: center;
+    margin-top: 50px;
+}
+
+form {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 30px;
+
+}
+
+h1 {
+    font-size: 18px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 12px;
+    line-height: 0px;
+    margin-bottom: 30px;
+}
+
+input {
+    background: rgba(0, 0, 0, 0.0);
+    border: none;
+    border-bottom: 3px solid white;
+    margin-bottom: 5px;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.9) inset;
+}
+
+input[value='Registrar'] {
+    display: flex;
+    width: 152.14px;
+    height: 41.3px;
+    margin-top: 20px;
+    background-color: #FFCE2E;
+    color: black;
+    border-radius: 15px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#input-file {
+    position: relative;
+    right: 93px;
+    margin: 0;
+    border: none;
+    font-size: 10px;
+}
+
+[value='Registrar'] {
+    border: none;
+}

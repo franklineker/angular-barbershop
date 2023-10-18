@@ -1,0 +1,74 @@
+h1 {
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
+
+form {
+    display: flex;
+    width: 370px;
+    position: relative;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.7);
+    height: 500px;
+    padding: 20px 30px;
+    color: white;
+
+}
+
+#email {
+    border: none;
+}
+
+#image {
+    position: relative;
+    right: 93px;
+    margin: 0;
+    border: none;
+    font-size: 10px;
+}
+
+.image-container {
+    align-items: center;
+    overflow: hidden;
+}
+
+.file-container {
+    position: relative;
+    left: 48px;
+    overflow: hidden;
+}
+
+[type="text"] {
+    margin-bottom: 10px;
+}
+
+input {
+    background: rgba(0, 0, 0, 0.0);
+    border: none;
+    border-bottom: 3px solid white;
+    margin-bottom: 5px;
+    color: white;
+    outline: none;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.9) inset;
+}
+
+input[value='Salvar'] {
+    border-bottom: none;
+    width: 100%;
+    color: black;
+    font-weight: bolder;
+}
+
+button {
+    align-self: center;
+    background-color: #FFCE2E;
+    width: 50%;
+    height: 10%;
+    padding: 0;
+    margin-top: 20px;
+}

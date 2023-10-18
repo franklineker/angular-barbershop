@@ -1,0 +1,13 @@
+<h1>Agendamentos</h1>
+<div class="appointment-wrapper">
+  <div class="appointments">
+      <mat-card class="appointment" *ngFor="let appointment of appointments">
+        <div class="item"><b>Cliente:</b> {{ appointment.clientName }}</div>
+        <div class="item"><b>Barbeiro:</b> {{ appointment.barberName }}</div>
+        <div class="item"><b>Corte:</b> {{ appointment.orderTitle }}</div>
+        <div class="item"><b>Data:</b> {{ appointment.date }}</div>
+        <div class="item"><b>Hora:</b> {{ appointment.hour }}</div>
+      </mat-card>
+  </div>
+  <button routerLink="/agenda" class="plus-button"><i class="fa-solid fa-circle-plus plus-icon"></i></button>
+</div>

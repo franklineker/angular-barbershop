@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="calendar">
+        <mat-card>
+            <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+        </mat-card>
+    </div>
+    <div class="d-flex hour-wrapper">
+        <mat-form-field appearance="fill" class="mt-3 ">
+            <input matInput [matDatepicker]="picker" placeholder="Escolha a data" [(ngModel)]="selectedDate"
+                name="selectedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="row">
+            <button class="hour-button" id="0800" (click)="hourButtonSelected('0800')" value="08:00">8:00</button>
+            <button class="hour-button" id="0830" (click)="hourButtonSelected('0830')" value="08:30">8:30</button>
+            <button class="hour-button" id="0900" (click)="hourButtonSelected('0900')" value="09:00">9:00</button>
+            <button class="hour-button" id="0930" (click)="hourButtonSelected('0930')" value="09:30">9:30</button>
+        </div>
+        <div class="row">
+            <button class="hour-button" id="1000" (click)="hourButtonSelected('1000')" value="10:00">10:00</button>
+            <button class="hour-button" id="1030" (click)="hourButtonSelected('1030')" value="10:30">10:30</button>
+            <button class="hour-button" id="1100" (click)="hourButtonSelected('1100')" value="11:00">11:00</button>
+            <button class="hour-button" id="1130" (click)="hourButtonSelected('1130')" value="11:30">11:30</button>
+        </div>
+        <div class="row">
+            <button class="hour-button" id="1200" (click)="hourButtonSelected('1200')" value="12:00">12:00</button>
+            <button class="hour-button" id="1230" (click)="hourButtonSelected('1230')" value="12:30">12:30</button>
+            <button class="hour-button" id="1300" (click)="hourButtonSelected('1300')" value="13:00">13:00</button>
+            <button class="hour-button" id="1330" (click)="hourButtonSelected('1330')" value="13:30">13:30</button>
+        </div>
+        <div class="row">
+            <button class="hour-button" id="1400" (click)="hourButtonSelected('1400')" value="14:00">14:00</button>
+            <button class="hour-button" id="1430" (click)="hourButtonSelected('1430')" value="14:30">14:30</button>
+            <button class="hour-button" id="1500" (click)="hourButtonSelected('1500')" value="15:00">15:00</button>
+            <button class="hour-button" id="1530" (click)="hourButtonSelected('1530')" value="15:30">15:30</button>
+        </div>
+        <div class="row">
+            <button class="hour-button" id="1600" (click)="hourButtonSelected('1600')" value="16:00">16:00</button>
+            <button class="hour-button" id="1630" (click)="hourButtonSelected('1630')" value="16:30">16:30</button>
+            <button class="hour-button" id="1700" (click)="hourButtonSelected('1700')" value="17:00">17:00</button>
+            <button class="hour-button" id="1730" (click)="hourButtonSelected('1730')" value="17:30">17:30</button>
+        </div>
+        <div class="row">
+            <button class="hour-button" id="1800" (click)="hourButtonSelected('1800')" value="18:00">18:00</button>
+            <button class="hour-button" id="1830" (click)="hourButtonSelected('1830')" value="18:30">18:30</button>
+            <button class="hour-button" id="1900" (click)="hourButtonSelected('1900')" value="19:00">19:00</button>
+            <button class="hour-button" id="1930" (click)="hourButtonSelected('1930')" value="19:30">19:30</button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around mt-4">
+        <div class="barber">
+            <label for="berbers">Barbeiro:</label>
+            <img class="image" src="../../../../assets/images/beard-model.png" id="barberImage" alt="barberImage">
+            <select (click)="setBarberImage()" class="my-select" name="barbers" [(ngModel)]="selectedBarberName">
+                <option>Selecione</option>
+                <option *ngFor="let barber of barbers">{{ barber.person.name }}</option>
+            </select>
+        </div>
+        <div class="order">
+            <label for="berbers">Corte:</label>
+            <img class="image" id="orderImage" src="../../../../assets/images/beard-model.png" alt="orderImage">
+            <select class="my-select" [(ngModel)]="selectedOrderTitle" (click)="setOrderImage();getOrderPrice()">
+                <option>Selecione</option>
+                <option *ngFor="let order of orders" (click)="getOrderPrice()">
+                    {{ order.title }}
+                </option>
+            </select>
+            <p class="price">R${{ selectedOrderPrice }}</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button routerLink="" class="book-button" (click)="bookAppointment()">
+            <a class="text-dark">Agendar</a>
+        </button>
+    </div>
+</div>

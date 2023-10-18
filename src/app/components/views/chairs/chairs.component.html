@@ -1,0 +1,17 @@
+<div class="chair-wrapper">
+  <h1>Cadeiras</h1>
+  <div class="table-header">
+    <div class="text-white px-1">Nº</div>
+    <div class="text-white px-1">Barbeiro</div>
+    <div class="text-white px-1">Início</div>
+    <div class="text-white px-1">Fim</div>
+  </div>
+  <div class="chairs">
+    <div class="my-1 chair" *ngFor="let chair of chairs">
+      <div class="item">{{ chair.id }}</div>
+      <div class="item">{{ chair.barberName }}</div>
+      <div class="item">{{ chair.startDate }}</div>
+      <div class="item">{{ chair.endDate }}</div>
+    </div>
+  </div>
+</div>

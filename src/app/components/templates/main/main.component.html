@@ -1,0 +1,35 @@
+<img src="../assets/images/main-bg-image.jpeg" alt="background" />
+<nav visibility="false">
+  <ul>
+    <a routerLink="/agenda">
+      <li>Agenda</li>
+    </a>
+    <a routerLink="/barbers">
+      <li>Barbeiros</li>
+    </a>
+    <a routerLink="/orders">
+      <li>Cortes</li>
+    </a>
+    <a routerLink="/contact">
+      <li>Contato</li>
+    </a>
+    <a routerLink="/address">
+      <li>Endereço</li>
+    </a>
+    <a routerLink="/chairs" *ngIf="isAdmin">
+      <li>Cadeiras</li>
+    </a>
+    <a routerLink="/reports" *ngIf="isAdmin">
+      <li>Relatórios</li>
+    </a>
+    <a routerLink="/appointments" *ngIf="isAdmin">
+      <li>Agendamentos</li>
+    </a>
+    <a routerLink="/clients" *ngIf="isAdmin">
+      <li>Clientes</li>
+    </a>
+  </ul>
+</nav>
+<main>
+  <router-outlet></router-outlet>
+</main>

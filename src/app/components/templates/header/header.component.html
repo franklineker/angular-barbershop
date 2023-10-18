@@ -1,0 +1,50 @@
+<div class="header">
+    <mat-toolbar>
+        <button mat-icon-button class=" btn menu-button" (click)="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <a routerLink="/">
+            <img src="../../../assets/images/logo.png" alt="Logo" />
+        </a>
+
+        <!-- <select class="signin-button" id="user-profile">
+            <option class="myOption" value="profile" class="signin-button">
+                Perfil
+            </option>
+            <option class="myOption" value="login" (click)="onLogin()" *ngIf="!isLogged">
+                Login
+            </option>
+            <option class="myOption" value="logout" (click)="onLogout()" *ngIf="isLogged">
+                Logout
+            </option>
+        </select> -->
+        <div class="dropdown">
+            <button class="btn dropdown-button" type="button" (click)="toggleUserMenu()">
+                <i class="fa-regular fa-user outline-none"></i>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div class="myDropdown">
+                <ul class="myDropdown-menu" hidden>
+                    <li>
+                        <button class="signin-button" (click)="onLogin(); toggleUserMenu()" *ngIf="!isLogged">
+                            Login
+                        </button>
+                    </li>
+                    <li>
+                        <button class="signin-button" (click)="onLogout(); toggleUserMenu()" *ngIf="isLogged">
+                            Logout
+                        </button>
+                    </li>
+                    <li><a class="signin-button" routerLink="profile" (click)="toggleUserMenu()">Meu Perfil</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- <button class="signin-button" (click)="onLogin()" *ngIf="!isLogged">
+      Login
+    </button>
+    <button class="signin-button" (click)="onLogout()" *ngIf="isLogged">
+      Logout
+    </button> -->
+    </mat-toolbar>
+</div>

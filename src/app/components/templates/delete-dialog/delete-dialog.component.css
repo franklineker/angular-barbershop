@@ -1,0 +1,36 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: black;
+  justify-content: space-between;
+  color: white;
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+}
+
+span {
+  font-size: 18px;
+  text-align: center;
+}
+
+.delete-button  {
+  background-color: red;
+  color: white;
+  font-weight: bolder;
+}
+
+.no-button  {
+  background-color: #FFCE2E;
+  margin-right: 30px;
+}
+
+.action-buttons {
+  align-self: center;
+}
+
+

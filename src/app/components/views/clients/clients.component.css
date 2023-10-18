@@ -1,0 +1,69 @@
+.client-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 540px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  padding: 10px 10px;
+  margin: 0;
+}
+
+.clients {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-template-rows: 230px;
+  grid-row-gap: 10px;
+  grid-column-gap: 2%;
+  width: 100%;
+  height: 490px;
+  overflow: scroll;
+}
+
+.client {
+  width: 180px;
+  height: 230px;
+  background-color: #FFCE2E;
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  word-break: break-all;
+}
+
+.crud-buttons {
+  align-self: flex-end;
+  justify-self: flex-end;
+  width: 25px;
+  border: none;
+  margin-right: 5px;
+  background-color: transparent;
+}
+
+.plus-icon {
+  font-size: 40px;
+  color: #FFCE2E;
+  border-radius: 20px;
+  width: 36px;
+
+}
+
+.trash-icon {
+  font-size: 20px;
+  color: black;
+  border-radius: 20px;
+  width: 20px;
+
+}
+
+.plus-button {
+  position: relative;
+  align-self: flex-end;
+  width: 36px;
+  border: none;
+  background-color: transparent;
+  margin-right: 10px;
+}
+

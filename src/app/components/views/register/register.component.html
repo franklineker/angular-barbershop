@@ -1,0 +1,19 @@
+<div class="contact-wrapper">
+    <h1>Ainda não tem um perfil? <br>Registre-se</h1>
+    <form #userForm="ngForm">
+        <label for="email">Nome</label>
+        <input type="text" id="email" name="name" [ngModel]="fulName" (ngModelChange)="fulName = $event">
+
+        <label for="email">E-mail</label>
+        <input type="text" id="email" name="email" [ngModel]="email" (ngModelChange)="email = $event">
+
+        <label for="password">Senha</label>
+        <input type="text" id="password" name="password" [ngModel]="password" (ngModelChange)="password = $event">
+
+        <label for="confirm-password">Confirme a senha</label>
+        <input type="text" id="confirm-password" name="confirm-password" [ngModel]="confirmPassword"
+            (ngModelChange)="confirmPassword = $event">
+
+        <input type="submit" value="Registrar" (click)="onSubmit()">
+    </form>
+</div>
