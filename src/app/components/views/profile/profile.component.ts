@@ -1,4 +1,3 @@
-import { filter } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../models/client.model';
 import { Person } from '../../../models/person.model';
@@ -15,6 +14,7 @@ export class ProfileComponent implements OnInit {
 
     isLogged!: boolean;
     clients!: Client[];
+    isImagePresent!: boolean;
     selectedImage!: File;
     client: Client = {
         id: "",
@@ -30,8 +30,8 @@ export class ProfileComponent implements OnInit {
             address: ""
         }
     };
-    imagePlaceHolder = '../../../assets/images/figaro.png'
-    imageURL!: string;
+    // client!: Client;
+    imageURL = '../../../assets/images/figaro.png';
 
     constructor(
         private clientsService: ClientsService,
@@ -40,6 +40,23 @@ export class ProfileComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.clientsService.findClients().subscribe(clients => {
+            console.log(clients)
+
+            const googleSub = this.tokenService.getGoogleSub();
+
+            if ((googleSub?.split("@").length)! > 1) {
+                this.client = clients.filter(c => c.person.email == googleSub)[0];
+                console.log("cliente com @", this.client)
+                this.isImagePresent = this.client.image ? true : false;
+            } else {
+                this.client = clients.filter(c => c.googleSub == googleSub)[0];
+                if (this.client.image == null) {
+                    this.client.image = { data: "", type: 0 }
+                }
+                console.log(this.client)
+            }
+        });
 
         this.getLogged();
         if (!this.isLogged) {
@@ -47,31 +64,11 @@ export class ProfileComponent implements OnInit {
             return;
         }
 
-        this.clientsService.findClients().subscribe(clients => {
-
-            const googleSub = this.tokenService.getGoogleSub();
-
-            if ((googleSub?.split("@").length)! > 1) {
-                this.client = clients.filter(c => c.person.email == googleSub)[0];
-                console.log("cliente com @", this.client)
-                this.client.googleSub = googleSub;
-                if (this.client.image == null) {
-                    this.client.image = { data: "", type: 0 }
-                }
-            } else {
-                this.client = clients.filter(c => c.googleSub == googleSub)[0];
-                if (this.client.image == null) {
-                    this.client.image = { data: "", type: 0 }
-                }
-                console.log(this.client)
-                this.client.googleSub = googleSub;
-            }
-        });
     }
 
 
     onSubmit(): void {
-        if (this.selectedImage.size > 1048576) {
+        if (this.selectedImage?.size > 1048576) {
             alert("O arquivo que você anexou é muito grande. Por favor, selecione um arquivo menor.")
             this.selectedImage
             return;
@@ -123,6 +120,7 @@ export class ProfileComponent implements OnInit {
             };
         }
 
+        $("[alt='image-placeholder']").attr("src", "{{imageURL}}");
         $(".file-container").removeAttr("hidden");
 
     }

@@ -2,28 +2,28 @@
     <h1>Perfil</h1>
     <div class="">
         <form class="myForm" action="/action_page.php">
-            <div class="overflow-hidden d-flex flex-column image-container" *ngIf="!client.image.data">
-                <img src="{{imagePlaceHolder}}" alt="profile-image" height=" 110" width="110">
+            <div class="overflow-hidden d-flex flex-column image-container" *ngIf="!isImagePresent">
+                <img src="{{imageURL}}" alt="image-placeholder" height=" 110" width="110">
                 <label for="image"><i class="fa-solid fa-paperclip clip-icon"></i>Escolha a foto</label>
                 <div class="file-container" hidden>
                     <input type="file" id="image" name="image" (change)="onSelectedImage($event)" required ngModel>
                 </div>
             </div>
-            <div class="overflow-hidden d-flex flex-column image-container" *ngIf="client.image.data">
+            <div class="overflow-hidden d-flex flex-column image-container" *ngIf="isImagePresent">
                 <img src="data:image/png;base64,{{client.image.data}}" alt="profile-image" height="110" width="110"><br>
                 <label for="image"><i class="fa-solid fa-paperclip clip-icon"></i>Escolha a foto</label>
                 <div class="file-container" hidden>
                     <input type="file" id="image" name="image" (change)="onSelectedImage($event)" required ngModel>
                 </div>
             </div>
+            <br>
+            <label for="description"><b>E-mail</b></label>
+            <input type="text" placeholder="Digite o preço" id="email" name="userEmail" required
+                [(ngModel)]="client.person.email" disabled>
 
             <label for="title"><b>Nome</b></label>
             <input type="text" placeholder="Digite o nome" id="name" name="userName" required
                 [(ngModel)]="client.person.name">
-
-            <label for="description"><b>E-mail</b></label>
-            <input type="text" placeholder="Digite o preço" id="email" name="userEmail" required
-                [(ngModel)]="client.person.email" disabled>
 
             <label for="description"><b>Phone</b></label>
             <input type="text" placeholder="Digite o preço" id="phone" name="userPhone" required

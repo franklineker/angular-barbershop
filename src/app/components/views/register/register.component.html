@@ -2,7 +2,7 @@
     <h1>Ainda não tem um perfil? <br>Registre-se</h1>
     <form #userForm="ngForm">
         <label for="email">Nome</label>
-        <input type="text" id="email" name="name" [ngModel]="fulName" (ngModelChange)="fulName = $event">
+        <input type="text" id="email" name="name" [ngModel]="name" (ngModelChange)="name = $event">
 
         <label for="email">E-mail</label>
         <input type="text" id="email" name="email" [ngModel]="email" (ngModelChange)="email = $event">

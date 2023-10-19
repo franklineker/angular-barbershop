@@ -30,12 +30,11 @@ form {
 
 .image-container {
     align-items: center;
-    overflow: hidden;
 }
 
 .file-container {
     position: relative;
-    left: 48px;
+    left: 55px;
     overflow: hidden;
 }
 

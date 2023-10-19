@@ -6,18 +6,6 @@
         <a routerLink="/">
             <img src="../../../assets/images/logo.png" alt="Logo" />
         </a>
-
-        <!-- <select class="signin-button" id="user-profile">
-            <option class="myOption" value="profile" class="signin-button">
-                Perfil
-            </option>
-            <option class="myOption" value="login" (click)="onLogin()" *ngIf="!isLogged">
-                Login
-            </option>
-            <option class="myOption" value="logout" (click)="onLogout()" *ngIf="isLogged">
-                Logout
-            </option>
-        </select> -->
         <div class="dropdown">
             <button class="btn dropdown-button" type="button" (click)="toggleUserMenu()">
                 <i class="fa-regular fa-user outline-none"></i>
@@ -39,12 +27,5 @@
                 </ul>
             </div>
         </div>
-
-        <!-- <button class="signin-button" (click)="onLogin()" *ngIf="!isLogged">
-      Login
-    </button>
-    <button class="signin-button" (click)="onLogout()" *ngIf="isLogged">
-      Logout
-    </button> -->
     </mat-toolbar>
 </div>
