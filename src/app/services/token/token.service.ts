@@ -29,14 +29,14 @@ export class TokenService {
         return localStorage.getItem(REFRESH_TOKEN);
     }
 
-    getGoogleSub(): string | null {
+    getUserEmail(): string | null {
         const token = this.getAccessToken();
         const payload = token?.split('.')[1];
         const payloadDecoded = buffer.Buffer.from(payload!, 'base64').toString(
             'utf-8'
         );
         const values = JSON.parse(payloadDecoded);
-        const sub = values.sub;
+        const sub = values.username;
 
         return sub;
 
@@ -63,6 +63,42 @@ export class TokenService {
         const roles = values.roles;
 
         if (roles.indexOf('ADMIN') < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    isBarber(): boolean {
+        if (!this.isLogged()) {
+            return false;
+        }
+
+        const token = this.getAccessToken();
+        const payload = token?.split('.')[1];
+        const payloadDecoded = atob(payload!);
+        const values = JSON.parse(payloadDecoded);
+        const roles = values.roles;
+
+        if (roles.indexOf('BARBER') < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    isClient(): boolean {
+        if (!this.isLogged()) {
+            return false;
+        }
+
+        const token = this.getAccessToken();
+        const payload = token?.split('.')[1];
+        const payloadDecoded = atob(payload!);
+        const values = JSON.parse(payloadDecoded);
+        const roles = values.roles;
+
+        if (roles.indexOf('CLIENT') < 0) {
             return false;
         }
 

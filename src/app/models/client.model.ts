@@ -4,10 +4,15 @@ export class Client {
 
     id!: String
     image!: {
-        data: string,
-        type: number
+        data: "",
+        type: 0
     }
-    googleSub?: String | null
+    // person1: Person = {
+    //     name: "",
+    //     phone: "",
+    //     email: "",
+    //     address: ""
+    // }
 
     constructor(
         public userType: Number = 3,

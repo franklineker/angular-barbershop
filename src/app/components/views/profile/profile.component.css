@@ -56,6 +56,12 @@ input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.9) inset;
 }
 
+textarea {
+    background: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: solid 2px;
+}
+
 input[value='Salvar'] {
     border-bottom: none;
     width: 100%;

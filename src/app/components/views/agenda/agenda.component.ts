@@ -71,9 +71,8 @@ export class AgendaComponent implements OnInit {
             const httpParams = new HttpParams({ fromObject: this.params });
             const codeUrl = this.authorize_uri + httpParams.toString();
             location.href = codeUrl;
-            console.log("d")
         }
-        console.log(this.tokenService.getGoogleSub());
+        console.log(this.tokenService.getUserEmail());
 
         this.barbersService.getBarbers().subscribe((barbers) => {
             console.log(barbers);
@@ -148,7 +147,7 @@ export class AgendaComponent implements OnInit {
         )[0];
         console.log(this.clients);
         let client = this.clients.filter(
-            (client) => client.person.email == this.tokenService.getGoogleSub()
+            (client) => client.person.email == this.tokenService.getUserEmail()
         )[0];
 
         let day = this.selectedDate.getDate().toString();

@@ -17,4 +17,8 @@ export class UserService {
     create(user: User): Observable<User> {
         return this.http.post<User>(`${this.base_url}/save`, user);
     }
+
+    findAll(): Observable<User[]> {
+        return this.http.get<User[]>(this.base_url);
+    }
 }

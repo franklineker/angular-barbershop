@@ -14,10 +14,10 @@ export class Barber {
     // image: File
     id!: String
     profilePicture!: {
-        data: String
-        type: Number
+        data: string
+        type: number
     }
-    userType: Number = 1
+    userType?: number = 1
 
 
     constructor(

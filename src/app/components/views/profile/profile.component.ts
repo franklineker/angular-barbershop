@@ -1,9 +1,15 @@
+import { filter } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../models/client.model';
 import { Person } from '../../../models/person.model';
 import { ClientsService } from 'src/app/services/clients/clients.service';
 import { TokenService } from 'src/app/services/token/token.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
+import { BarbersService } from 'src/app/services/barbers/barbers.service';
+import { Barber } from 'src/app/models/barber.model';
+import { User } from 'src/app/models/user.model';
+
 
 @Component({
     selector: 'app-profile',
@@ -12,7 +18,11 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
+    userEmail = this.tokenService.getUserEmail();
     isLogged!: boolean;
+    isAdmin!: boolean;
+    isBarber!: boolean;
+    isClient!: boolean;
     clients!: Client[];
     isImagePresent!: boolean;
     selectedImage!: File;
@@ -30,33 +40,72 @@ export class ProfileComponent implements OnInit {
             address: ""
         }
     };
-    // client!: Client;
-    imageURL = '../../../assets/images/figaro.png';
+    barber: Barber = {
+        id: "",
+        profilePicture: {
+            data: "",
+            type: 0
+        },
+        image: this.selectedImage,
+        about: "",
+        rating: 0,
+        person: {
+            name: "",
+            phone: "",
+            email: "",
+            address: ""
+        }
+    };
+    admin: User = {
+        name: "",
+        email: "",
+        password: "",
+        roles: []
+    };
+    imageURL = '../../../assets/images/manoel-gomes.png';
 
     constructor(
         private clientsService: ClientsService,
+        private userService: UserService,
+        private barberService: BarbersService,
         private tokenService: TokenService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
-        this.clientsService.findClients().subscribe(clients => {
-            console.log(clients)
+        this.getIsAdmin();
+        this.getIsBarber();
+        this.getIsClient();
 
-            const googleSub = this.tokenService.getGoogleSub();
+        if (this.isAdmin) {
+            $("label[for='name']").remove();
+            $("label[for='phone']").remove();
+            $("label[for='address']").remove();
+            this.userService.findAll().subscribe(users => {
+                this.admin = users.filter(u => u.email == this.userEmail)[0];
+                console.log("admin -> ", this.admin);
+            });
+        } else if (this.isBarber) {
+            this.barberService.getBarbers().subscribe(barbers => {
+                this.barber = barbers.filter(b => b.person.email == this.userEmail)[0];
+                this.isImagePresent = this.barber.profilePicture ? true : false;
+                this.imageURL = this.barber.profilePicture.data;
+                console.log("barber -> ", this.barber);
+            })
+        } else {
+            this.clientsService.findClients().subscribe(clients => {
 
-            if ((googleSub?.split("@").length)! > 1) {
-                this.client = clients.filter(c => c.person.email == googleSub)[0];
-                console.log("cliente com @", this.client)
-                this.isImagePresent = this.client.image ? true : false;
-            } else {
-                this.client = clients.filter(c => c.googleSub == googleSub)[0];
-                if (this.client.image == null) {
-                    this.client.image = { data: "", type: 0 }
+                if ((this.userEmail?.split("@").length)! > 1) {
+                    this.client = clients.filter(c => c.person.email == this.userEmail)[0];
+                    this.isImagePresent = this.client.image ? true : false;
+                    this.imageURL = this.client.image.data;
+                    console.log("cliente com @", this.client)
+                } else {
+                    this.client = clients.filter(c => c.person.email == this.userEmail)[0];
+                    console.log(this.client)
                 }
-                console.log(this.client)
-            }
-        });
+            });
+        }
 
         this.getLogged();
         if (!this.isLogged) {
@@ -74,7 +123,6 @@ export class ProfileComponent implements OnInit {
             return;
         }
         const id = this.client.id;
-        const googleSub = this.client.googleSub;
         const name = $("[name=userName]").val()?.toString()!;
         const email = $("[name=userEmail]").val()?.toString()!;
         const phone = $("[name=userPhone]").val()?.toString()!;
@@ -89,7 +137,6 @@ export class ProfileComponent implements OnInit {
 
         let client = new Client(3, person);
         client.id = id;
-        client.googleSub = googleSub;
 
         this.clientsService.setClientToEdit(client);
 
@@ -127,5 +174,15 @@ export class ProfileComponent implements OnInit {
 
     getLogged(): void {
         this.isLogged = this.tokenService.isLogged();
+    }
+
+    getIsAdmin(): void {
+        this.isAdmin = this.tokenService.isAdmin();
+    }
+    getIsBarber(): void {
+        this.isBarber = this.tokenService.isBarber();
+    }
+    getIsClient(): void {
+        this.isClient = this.tokenService.isClient();
     }
 }
