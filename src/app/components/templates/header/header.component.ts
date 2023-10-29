@@ -2,7 +2,6 @@ import { TokenService } from './../../../services/token/token.service';
 import { Component, OnInit } from '@angular/core';
 import { MainComponent } from '../main/main.component';
 import { environment } from 'src/environments/environment';
-import { HttpParams } from '@angular/common/http';
 import Oauth2Service from 'src/app/services/oauth2/oauth2.service';
 import * as $ from 'jquery';
 
@@ -15,20 +14,10 @@ const CHARACTERS = 'ABCDEFGHIJKLMNOPQWXYZabcdefghijklmnopqwxyz0123456789';
 })
 export class HeaderComponent implements OnInit {
     showMenuIcon = true;
-    authorize_uri = environment.authorize_uri;
     logout_url = environment.logout_url;
 
     isLogged!: boolean;
     isAdmin!: boolean;
-
-    params: any = {
-        client_id: environment.client_id,
-        redirect_uri: environment.redirect_uri,
-        scope: environment.scope,
-        response_type: environment.response_type,
-        response_mode: environment.response_mode,
-        code_challenge_method: environment.code_challenge_method,
-    };
 
     constructor(
         private main: MainComponent,
@@ -52,15 +41,7 @@ export class HeaderComponent implements OnInit {
     }
 
     onLogin(): void {
-        const code_verifier = this.oauth2Service.generateCodeVerifier();
-        this.tokenService.setVerifier(code_verifier);
-        this.params.code_challenge =
-            this.oauth2Service.generateCodeChallenge(code_verifier);
-
-        const httpParams = new HttpParams({ fromObject: this.params });
-        const codeUrl = this.authorize_uri + httpParams.toString();
-        console.log(codeUrl);
-        location.href = codeUrl;
+        this.oauth2Service.onLogin();
 
     }
 

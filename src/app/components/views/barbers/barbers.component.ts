@@ -67,18 +67,27 @@ export class BarbersComponent implements OnInit {
     onSubmit(): void {
         const name = $('[name=name]').val()?.toString()!;
         const about = $('[name=about]').val()?.toString()!;
+        const email = $('[name=email]').val()?.toString()!;
+
 
         if (this.submitType == 'createBarber') {
+            this.barber.person.email = email;
             this.barber.person.name = name;
+            this.barber.about = about;
+            this.barber.image = this.selectedFile;
 
-            this.barber = new Barber(about, this.selectedFile, 0, this.barber.person);
-            this.barberService.createBarber(this.barber).subscribe((data) => {
+            let barber = new Barber(1, about, this.selectedFile, this.barber.person);
+
+            this.barberService.createBarber(barber).subscribe((data) => {
                 this.barberService.createOrUpdateResponse = data;
+                barber.id = data.id;
                 console.log(data);
             });
 
-            this.uploadImage(this.selectedFile);
+            this.uploadImage(barber.id, this.selectedFile);
         } else if (this.submitType == 'editBarber') {
+            this.barber.person.name = name;
+            this.barber.person.email = email;
             const id = this.barber.id;
 
             if (!this.selectedFile) {
@@ -91,21 +100,21 @@ export class BarbersComponent implements OnInit {
                 this.selectedFile = imageFile;
             }
 
-            this.barber = new Barber(about, this.selectedFile, 0, this.barber.person);
-            this.barber.person.name = name;
+            let barber = new Barber(1, about, this.selectedFile, this.barber.person);
+            barber.id = id;
 
-            this.barberService.update(id, this.barber).subscribe((data) => {
+            this.barberService.update(barber).subscribe((data) => {
                 this.barberService.createOrUpdateResponse = data;
                 console.log(data);
             });
 
-            this.uploadImage(this.selectedFile);
+            this.uploadImage(barber.id, this.selectedFile);
         }
     }
 
-    uploadImage(file: File): void {
+    uploadImage(id: string, file: File): void {
         setTimeout(() => {
-            this.barberService.uploadImage(file).subscribe((data) => {
+            this.barberService.uploadImage(id, file).subscribe((data) => {
                 alert(`Corte salvo com sucesso!`);
                 window.location.reload();
             });

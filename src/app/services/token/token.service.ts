@@ -31,7 +31,7 @@ export class TokenService {
 
     getUserEmail(): string | null {
         const token = this.getAccessToken();
-        const payload = token?.split('.')[1];
+        const payload = token!.split('.')[1];
         const payloadDecoded = buffer.Buffer.from(payload!, 'base64').toString(
             'utf-8'
         );

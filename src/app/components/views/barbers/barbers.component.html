@@ -1,50 +1,55 @@
 <h1>Barbeiros</h1>
 <div class="barbers">
-  <div class="form-popup">
-    <form #barberForm="ngForm" id="myForm" name="barberForm" action="/action_page.php" class="form-container" (ngSubmit)="onSubmit()"
-      novalidate>
-      <h2></h2>
-      <label for="title"><b>Nome</b></label>
-      <input type="text" placeholder="Digite o nome" id="name" name="name" required [ngModel]="barber.person.name">
-      <label for="about"><b>Sobre</b></label>
-      <input type="text" placeholder="Digite o preço" id="about" name="about" required [ngModel]="barber.about">
-      <label for="image"><b>Foto</b></label>
-      <br>
-      <input type="file" placeholder="Anexe uma foto" id="image" name="image" (change)="onSelectedImage($event)" required
-        ngModel>
-      <div class="d-flex justify-content-between">
-        <button type="button" class="btn cancel" id="close-button" (click)="closeForm()"><b>Fechar</b></button>
-        <button type="submit" class="btn" (click)="closeForm()"><b>Salvar</b></button>
-      </div>
-    </form>
-  </div>
-  <div class="overflow-auto">
-    <div class="barber" *ngFor="let barber of barbers">
-      <div class="d-flex flex-column">
-        <img src="data:image/png;base64,{{barber.profilePicture.data}}" alt="barber-image">
-        <span class="name">{{ barber.person.name }}</span>
-      </div>
-      <div class="d-flex flex-column px-1">
-        <span class="d-flex text-justify about">{{ barber.about }}</span>
-        <div class="rating">
-          <div class="stars">
-            <span class="fa-solid fa-star myYellow"></span>
-            <span class="fa-solid fa-star myYellow"></span>
-            <span class="fa fa-star-half-stroke myYellow"></span>
-            <span class="fa fa-star-o myYellow"></span>
-            <span class="fa fa-star-o myYellow"></span>
-          </div>
-          <div>
-            <button class="crud-buttons" name="editBarber" (click)="openForm($event, barber)">
-              <i class="fa-regular fa-pen-to-square trash-icon"></i></button>
-            <button class="crud-buttons" name="deleteBarber" (click)="openDeleteDialog($event, barber)">
-              <i class="fa-solid fa-trash-can trash-icon"></i></button>
-          </div>
-        </div>
-      </div>
+    <div class="form-popup">
+        <form #barberForm="ngForm" id="myForm" name="barberForm" action="/action_page.php" class="form-container"
+            (ngSubmit)="onSubmit()" novalidate>
+            <h2></h2>
+            <label for="email"><b>E-mail</b></label>
+            <input type="text" placeholder="Digite o nome" id="email" name="email" required
+                [ngModel]="barber.person.email">
+            <label for="title"><b>Nome</b></label>
+            <input type="text" placeholder="Digite o nome" id="name" name="name" required
+                [ngModel]="barber.person.name">
+            <label for="about"><b>Sobre</b></label>
+            <input type="text" placeholder="Digite o preço" id="about" name="about" required [ngModel]="barber.about">
+            <label for="image"><b>Foto</b></label>
+            <br>
+            <input type="file" placeholder="Anexe uma foto" id="image" name="image" (change)="onSelectedImage($event)"
+                required ngModel>
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn cancel" id="close-button" (click)="closeForm()"><b>Fechar</b></button>
+                <button type="submit" class="btn" (click)="closeForm()"><b>Salvar</b></button>
+            </div>
+        </form>
     </div>
-  </div>
-  <button class="plus-button" name="createBarber" (click)="openForm($event, barber)"><i
-      class="fa-solid fa-circle-plus plus-icon"></i>
-  </button>
+    <div class="overflow-auto">
+        <div class="barber" *ngFor="let barber of barbers">
+            <div class="d-flex flex-column">
+                <img src="data:image/png;base64,{{barber.profilePicture.data}}" alt="barber-image">
+                <span class="name">{{ barber.person.name }}</span>
+            </div>
+            <div class="d-flex flex-column px-1">
+                <span class="d-flex text-justify about">{{ barber.about }}</span>
+                <div class="rating">
+                    <div class="stars">
+                        <span class="fa-solid fa-star myYellow"></span>
+                        <span class="fa-solid fa-star myYellow"></span>
+                        <span class="fa fa-star-half-stroke myYellow"></span>
+                        <span class="fa fa-star-o myYellow"></span>
+                        <span class="fa fa-star-o myYellow"></span>
+                    </div>
+                    <div>
+                        <button class="crud-buttons" name="editBarber" (click)="openForm($event, barber)">
+                            <i class="fa-regular fa-pen-to-square trash-icon"></i></button>
+                        <button class="crud-buttons" name="deleteBarber" (click)="openDeleteDialog($event, barber)">
+                            <i class="fa-solid fa-trash-can trash-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="plus-button" name="createBarber" (click)="openForm($event, barber)"><i
+            class="fa-solid fa-circle-plus plus-icon"></i>
+    </button>
 </div>

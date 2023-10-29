@@ -7,27 +7,26 @@ import { Order } from 'src/app/models/order.model';
 import { TokenService } from '../token/token.service';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class AgendaService {
-  baseUrl = 'http://localhost:9000';
-  barbers!: Barber[];
-  orders!: Order[];
+    baseUrl = 'http://localhost:9000';
+    barbers!: Barber[];
+    orders!: Order[];
 
-  token = '' + this.tokenService.getAccessToken();
-  headers_object = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`,
-  });
-  httpOptions = { headers: this.headers_object };
+    token = '' + this.tokenService.getAccessToken();
+    headers_object = new HttpHeaders({
+        Authorization: `Bearer ${this.token}`,
+    });
+    httpOptions = { headers: this.headers_object };
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {}
+    constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-  setAppointment(appointment: Appointment): Observable<Appointment> {
-    console.log(this.token);
-    return this.http.post<Appointment>(
-      `${this.baseUrl}/appointments/save`,
-      appointment,
-      this.httpOptions
-    );
-  }
+    setAppointment(appointment: Appointment): Observable<Appointment> {
+        return this.http.post<Appointment>(
+            `${this.baseUrl}/appointments/save`,
+            appointment
+            // this.httpOptions
+        );
+    }
 }

@@ -12,19 +12,17 @@ export class Barber {
     // person: Person
     // rating: Number
     // image: File
-    id!: String
+    id!: string
     profilePicture!: {
         data: string
         type: number
     }
-    userType?: number = 1
-
+    rating!: number
 
     constructor(
-        // public name: String,
+        public userType: number = 1,
         public about: String,
         public image: File,
-        public rating: number,
         public person: {
             name: String,
             phone: String,

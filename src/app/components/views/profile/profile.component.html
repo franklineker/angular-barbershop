@@ -2,21 +2,20 @@
     <h1>Perfil</h1>
     <div class="">
         <form class="myForm" action="/action_page.php">
-            <div class="overflow-hidden d-flex flex-column image-container" *ngIf="!isImagePresent">
-                <img src="{{imageURL}}" alt="image-placeholder" height=" 110" width="110">
+            <div class="overflow-hidden d-flex flex-column align-items-center image-container" *ngIf="!isImagePresent">
+                <img src="{{imagePlaceHolder}}" alt="image-placeholder" height=" 110" width="110">
                 <label for="image"><i class="fa-solid fa-paperclip clip-icon"></i>Alterar foto</label>
                 <div class="file-container" hidden>
                     <input type="file" id="image" name="image" (change)="onSelectedImage($event)" required ngModel>
                 </div>
             </div>
-            <div class="overflow-hidden d-flex flex-column image-container" *ngIf="isImagePresent">
+            <div class="overflow-hidden d-flex flex-column align-items-center image-container" *ngIf="isImagePresent">
                 <img src="data:image/png;base64,{{imageURL}}" alt="profile-image" height="110" width="110"><br>
                 <label for="image"><i class="fa-solid fa-paperclip clip-icon"></i>Alterar foto</label>
                 <div class="file-container" hidden>
                     <input type="file" id="image" name="image" (change)="onSelectedImage($event)" required ngModel>
                 </div>
             </div>
-            <br>
             <label for="email"><b>E-mail</b></label>
             <input type="text" placeholder="Digite o email" id="email" name="userEmail" required
                 [(ngModel)]="barber.person.email" disabled *ngIf="isBarber">
@@ -38,7 +37,7 @@
                 [(ngModel)]="client.person.phone" *ngIf="isClient">
 
             <div *ngIf="isBarber" class="d-flex flex-column">
-                <label for="about">Sobre</label>
+                <label for="about"><b>Sobre</b></label>
                 <textarea name="about" id="about" cols="30" rows="2"
                     [(ngModel)]="barber.about">{{barber.about}}</textarea>
             </div>
@@ -49,7 +48,8 @@
             <input type="text" placeholder="Digite o preço" id="address" name="userAddress" required
                 [(ngModel)]="client.person.address" *ngIf="isClient">
 
-            <button type="submit" class="btn" (click)="onSubmit()"><input type="submit" value="Salvar"></button>
+            <button type="submit" class="btn" (click)="onSubmit()" *ngIf="!isAdmin"><input type="submit"
+                    value="Salvar"></button>
         </form>
     </div>
 </div>

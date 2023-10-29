@@ -1,7 +1,13 @@
+.profile {
+    overflow: scroll;
+    height: 100%;
+}
+
 h1 {
     color: white;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 10px;
+    margin: 0;
 }
 
 form {
@@ -10,8 +16,8 @@ form {
     position: relative;
     flex-direction: column;
     background: rgba(0, 0, 0, 0.7);
-    height: 500px;
-    padding: 20px 30px;
+    height: 530px;
+    padding: 10px 30px;
     color: white;
 
 }
@@ -20,21 +26,20 @@ form {
     border: none;
 }
 
-#image {
-    position: relative;
-    right: 93px;
-    margin: 0;
-    border: none;
-    font-size: 10px;
+img {
+    border-radius: 10px;
 }
 
-.image-container {
-    align-items: center;
+#image {
+    position: relative;
+    right: 123px;
+    margin: 0;
+    border: none;
 }
 
 .file-container {
     position: relative;
-    left: 55px;
+    left: 85px;
     overflow: hidden;
 }
 

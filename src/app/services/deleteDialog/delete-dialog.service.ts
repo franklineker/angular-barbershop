@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DeleteDialogService {
 
-  deleteType!: String
+    deleteType!: String
 
-  constructor() { }
+    constructor() { }
 
-  setDeleteType(deleteType: String): void {
-    this.deleteType = deleteType
-  }
+    setDeleteType(deleteType: String): void {
+        this.deleteType = deleteType
+    }
 
-  getDeleteType(): String {
-    return this.deleteType
-  }
+    getDeleteType(): String {
+        return this.deleteType
+    }
 }

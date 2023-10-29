@@ -72,10 +72,8 @@ export class AgendaComponent implements OnInit {
             const codeUrl = this.authorize_uri + httpParams.toString();
             location.href = codeUrl;
         }
-        console.log(this.tokenService.getUserEmail());
 
         this.barbersService.getBarbers().subscribe((barbers) => {
-            console.log(barbers);
             this.barbers = barbers;
         });
 
@@ -85,7 +83,6 @@ export class AgendaComponent implements OnInit {
 
         this.clientesService.findClients().subscribe((clients) => {
             this.clients = clients;
-            console.log(clients);
         });
     }
 
@@ -96,7 +93,6 @@ export class AgendaComponent implements OnInit {
         });
 
         this.selectedHour = $(`#${id}`).val()?.toString();
-        console.log(this.selectedHour);
     }
 
     getOrderPrice(): void {
@@ -141,11 +137,9 @@ export class AgendaComponent implements OnInit {
         let barber = this.barbers.filter(
             (barber) => barber.person.name == this.selectedBarber.person.name
         )[0];
-        console.log(barber);
         let order = this.orders.filter(
             (order) => order.title == this.selectedOrderTitle
         )[0];
-        console.log(this.clients);
         let client = this.clients.filter(
             (client) => client.person.email == this.tokenService.getUserEmail()
         )[0];
@@ -158,11 +152,14 @@ export class AgendaComponent implements OnInit {
 
         let appointment: Appointment = {
             clientName: client.person.name,
+            clientID: client.id,
             barberName: barber.person.name,
+            barberID: barber.id,
             orderTitle: order.title,
             date: date,
             hour: hour,
         };
+
 
         this.agendaService.setAppointment(appointment).subscribe(() => {
             alert('Agendamento realizado com sucesso!');

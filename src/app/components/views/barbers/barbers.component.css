@@ -1,158 +1,164 @@
 .barbers {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  padding: 0px 0px 15px;
-  height: 530px;
-  width: 100%;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 0px 0px 15px;
+    height: 530px;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .barber {
-  display: flex;
-  margin-bottom: 20px;
+    display: flex;
+    margin-bottom: 20px;
 }
 
 img {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
 }
 
 h1 {
-  text-align: center;
-  color: white;
-  padding-top: 20px;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
 }
 
 .name {
-	background-color: #FFCE2E;
-	border-radius: 10px;
-	font-size: 12px;
-	color: black;
-	width: 60px;
-  text-align: center;
-  margin-top: 5px;
-  line-height: 100%;
-  padding: 5px;
-  word-break: break-all;
+    background-color: #FFCE2E;
+    border-radius: 10px;
+    font-size: 12px;
+    color: black;
+    width: 60px;
+    text-align: center;
+    margin-top: 5px;
+    line-height: 100%;
+    padding: 5px;
+    word-break: break-all;
 }
 
 .about {
-  position: relative;
-  line-height: 100%;
-  padding: 2px;
-  width: 305px;
-  height: 60px;
-  max-height: 80px;
-  overflow: scroll;
+    position: relative;
+    line-height: 100%;
+    padding: 2px;
+    width: 305px;
+    height: 60px;
+    max-height: 80px;
+    overflow: scroll;
 }
 
 .rating {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
 }
 
 .plus-button {
-  position: relative;
-  align-self: flex-end;
-  width: 36px;
-  border: none;
-  background-color: transparent;
-  margin-top: 30px;
-  margin-right: 10px;
-  bottom: 0;
+    position: relative;
+    align-self: flex-end;
+    width: 36px;
+    border: none;
+    background-color: transparent;
+    margin-top: 30px;
+    margin-right: 10px;
+    bottom: 0;
 }
 
 .plus-icon {
-  font-size: 40px;
-  color: #FFCE2E;
-  border-radius: 20px;
-  width: 36px;
+    font-size: 40px;
+    color: #FFCE2E;
+    border-radius: 20px;
+    width: 36px;
 
 }
 
 .trash-icon {
-  font-size: 20px;
-  color: #FFCE2E;
-  border-radius: 20px;
-  width: 20px;
+    font-size: 20px;
+    color: #FFCE2E;
+    border-radius: 20px;
+    width: 20px;
 
 }
 
 
 .crud-buttons {
-  align-self: flex-end;
-  justify-self: flex-end;
-  width: 25px;
-  border: none;
-  margin-right: 5px;
-  background-color: transparent;
+    align-self: flex-end;
+    justify-self: flex-end;
+    width: 25px;
+    border: none;
+    margin-right: 5px;
+    background-color: transparent;
 }
 
-h2 { text-align: center;}
+h2 {
+    text-align: center;
+}
 
 .form-popup {
-  position: fixed;
-  right: 10px;
-  top: 110px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-  border: none;
+    position: fixed;
+    right: 10px;
+    top: 110px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    border: none;
 
 }
 
 /* Add styles to the form container */
 .form-container {
-  display: none;
-  flex-direction: column;
-  width: 370.4px;
-  padding: 10px;
-  background-color: black;
-  border: none;
-  align-self: start;
-  color: white;
+    display: none;
+    flex-direction: column;
+    width: 370.4px;
+    padding: 10px;
+    background-color: black;
+    border: none;
+    align-self: start;
+    color: white;
 }
 
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=number], form-container input[type=file] {
-  width: 100%;
-  max-height: 30px;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  border-bottom: solid 1px white;
-  background: black;
-  color: white;
-  box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.9) inset;
+.form-container input[type=text],
+.form-container input[type=number],
+form-container input[type=file] {
+    width: 100%;
+    max-height: 30px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    border-bottom: solid 1px white;
+    background: black;
+    color: white;
+    box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.9) inset;
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=number]:focus {
-  outline: none;
+.form-container input[type=text]:focus,
+.form-container input[type=number]:focus {
+    outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #FFCE2E;
-  color: black;
-  padding: 12px 20px;
-  right: 10px;
-  border: none;
-  cursor: pointer;
-  width: 150px;
-  margin-bottom:10px;
-  margin-top: 20px;
-  opacity: 0.9;
+    background-color: #FFCE2E;
+    color: black;
+    padding: 12px 20px;
+    right: 10px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    opacity: 0.9;
 
 }
 
 .form-container .cancel {
-  background-color: red;
+    background-color: red;
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
+.form-container .btn:hover,
+.open-button:hover {
+    opacity: 1;
 }

@@ -6,56 +6,62 @@ import { environment } from 'src/environments/environment';
 import { Barber } from 'src/app/models/barber.model';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class BarbersService {
-  baseUrl = 'http://localhost:9000/barbers';
-  createOrUpdateResponse!: any;
-  barberToDelete!: Barber;
-  data!: any;
+    baseUrl = 'http://localhost:9000/barbers';
+    createOrUpdateResponse!: any;
+    barberToDelete!: Barber;
+    data!: any;
 
-  token = '' + this.tokenService.getAccessToken();
-  headers_object = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`,
-  });
-  httpOptions = { headers: this.headers_object };
+    token = '' + this.tokenService.getAccessToken();
+    headers_object = new HttpHeaders({
+        Authorization: `Bearer ${this.token}`,
+    });
+    httpOptions = { headers: this.headers_object };
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {}
+    constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-  getBarbers(): Observable<Barber[]> {
-    console.log(this.httpOptions);
-    return this.http.get<Barber[]>(`${this.baseUrl}`);
-  }
+    getBarbers(): Observable<Barber[]> {
+        return this.http.get<Barber[]>(`${this.baseUrl}`);
+    }
 
-  createBarber(barber: Barber): Observable<Barber> {
-    return this.http.post<Barber>(`${this.baseUrl}/save`, barber);
-  }
+    findBarberByEmail(email: string, callback: (barber: Barber) => void): void {
 
-  setBarberToDelete(barber: Barber): void {
-    this.barberToDelete = barber;
-  }
+        this.getBarbers().subscribe(barbers => {
+            const barber = barbers.filter(barber => barber.person.email == email)[0];
+            callback(barber);
+        });
 
-  getBarberToDelete(): Barber {
-    return this.barberToDelete;
-  }
+    }
 
-  uploadImage(file: File): Observable<FormData> {
-    const formData = new FormData();
-    formData.append('file', file);
+    createBarber(barber: Barber): Observable<Barber> {
+        return this.http.post<Barber>(`${this.baseUrl}/save`, barber);
+    }
 
-    const id = this.createOrUpdateResponse.id;
+    setBarberToDelete(barber: Barber): void {
+        this.barberToDelete = barber;
+    }
 
-    return this.http.put<FormData>(
-      `${this.baseUrl}/updatePicture/${id}`,
-      formData
-    );
-  }
+    getBarberToDelete(): Barber {
+        return this.barberToDelete;
+    }
 
-  update(id: String, barber: Barber): Observable<Barber> {
-    return this.http.put<Barber>(`${this.baseUrl}/update/${id}`, barber);
-  }
+    uploadImage(id: string, file: File): Observable<FormData> {
+        const formData = new FormData();
+        formData.append('file', file);
 
-  delete(id: String): Observable<Barber> {
-    return this.http.delete<Barber>(`${this.baseUrl}/delete/${id}`);
-  }
+        return this.http.put<FormData>(
+            `${this.baseUrl}/updatePicture/${id}`,
+            formData
+        );
+    }
+
+    update(barber: Barber): Observable<Barber> {
+        return this.http.put<Barber>(`${this.baseUrl}/update/${barber.id}`, barber);
+    }
+
+    delete(id: String): Observable<Barber> {
+        return this.http.delete<Barber>(`${this.baseUrl}/delete/${id}`);
+    }
 }

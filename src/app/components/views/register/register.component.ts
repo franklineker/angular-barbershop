@@ -5,6 +5,7 @@ import { Person } from 'src/app/models/person.model';
 import { User } from 'src/app/models/user.model';
 import { ClientsService } from 'src/app/services/clients/clients.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { HeaderComponent } from '../../templates/header/header.component';
 
 @Component({
     selector: 'app-register',
@@ -21,11 +22,16 @@ export class RegisterComponent implements OnInit {
     constructor(
         private userService: UserService,
         private router: Router,
-        private clientsService: ClientsService
+        private clientsService: ClientsService,
+        private headerComponet: HeaderComponent
     ) { }
 
     ngOnInit(): void {
 
+    }
+
+    onLogin(): void {
+        this.headerComponet.onLogin();
     }
 
     onSubmit(): void {

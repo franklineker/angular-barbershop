@@ -2,7 +2,7 @@ import { Person } from "./person.model";
 
 export class Client {
 
-    id!: String
+    id!: string
     image!: {
         data: "",
         type: 0

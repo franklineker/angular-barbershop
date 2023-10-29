@@ -1,10 +1,10 @@
 export class Person {
 
     constructor(
-        public name: String,
-        public phone: String,
-        public email: String,
-        public address: String
+        public name: string,
+        public phone: string,
+        public email: string,
+        public address: string
     ) { }
 
 }

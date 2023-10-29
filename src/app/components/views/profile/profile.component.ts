@@ -18,7 +18,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class ProfileComponent implements OnInit {
 
-    userEmail = this.tokenService.getUserEmail();
+    userEmail!: string;
     isLogged!: boolean;
     isAdmin!: boolean;
     isBarber!: boolean;
@@ -54,7 +54,8 @@ export class ProfileComponent implements OnInit {
             phone: "",
             email: "",
             address: ""
-        }
+        },
+        userType: 1
     };
     admin: User = {
         name: "",
@@ -62,7 +63,8 @@ export class ProfileComponent implements OnInit {
         password: "",
         roles: []
     };
-    imageURL = '../../../assets/images/manoel-gomes.png';
+    imageURL = ``;
+    imagePlaceHolder = '../../../assets/images/user-placeholder.png';
 
     constructor(
         private clientsService: ClientsService,
@@ -73,9 +75,22 @@ export class ProfileComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+
+        this.getLogged();
+        console.log(this.isLogged)
+        console.log(this.userEmail)
+        if (!this.isLogged) {
+            this.router.navigate(['register']);
+        } else {
+            this.userEmail = this.tokenService.getUserEmail()!;
+        }
         this.getIsAdmin();
         this.getIsBarber();
         this.getIsClient();
+
+        console.log(this.isAdmin);
+        console.log(this.isBarber);
+        console.log(this.isClient);
 
         if (this.isAdmin) {
             $("label[for='name']").remove();
@@ -92,10 +107,11 @@ export class ProfileComponent implements OnInit {
                 this.imageURL = this.barber.profilePicture.data;
                 console.log("barber -> ", this.barber);
             })
-        } else {
+        } else if (this.isClient) {
+
             this.clientsService.findClients().subscribe(clients => {
 
-                if ((this.userEmail?.split("@").length)! > 1) {
+                if ((this.userEmail.split("@").length)! > 0) {
                     this.client = clients.filter(c => c.person.email == this.userEmail)[0];
                     this.isImagePresent = this.client.image ? true : false;
                     this.imageURL = this.client.image.data;
@@ -107,27 +123,23 @@ export class ProfileComponent implements OnInit {
             });
         }
 
-        this.getLogged();
-        if (!this.isLogged) {
-            this.router.navigate(["register"]);
-            return;
-        }
-
     }
 
 
     onSubmit(): void {
-        if (this.selectedImage?.size > 1048576) {
+
+        if (this.selectedImage && this.selectedImage!.size > 1048576) {
             alert("O arquivo que você anexou é muito grande. Por favor, selecione um arquivo menor.")
             this.selectedImage
             return;
         }
         const id = this.client.id;
+        const barberID = this.barber.id;
         const name = $("[name=userName]").val()?.toString()!;
         const email = $("[name=userEmail]").val()?.toString()!;
         const phone = $("[name=userPhone]").val()?.toString()!;
         const address = $("[name=userAddress]").val()?.toString()!;
-
+        const about = $("[name=about]").val()?.toString()!;
         const person: Person = {
             name: name,
             email: email,
@@ -138,22 +150,39 @@ export class ProfileComponent implements OnInit {
         let client = new Client(3, person);
         client.id = id;
 
-        this.clientsService.setClientToEdit(client);
+        let barber = new Barber(1, about, this.selectedImage, person)
+        barber.id = barberID;
 
-        this.clientsService.update(client).subscribe(client => {
-            console.log(client);
-            this.clientsService.createOrUpdateResponse = client;
-        });
-        this.updatePicture(this.selectedImage);
+        if (this.isClient) {
+            this.clientsService.update(client).subscribe(client => {
+                console.log(client);
+            });
+            this.updatePicture(client.id, this.selectedImage);
+        } else if (this.isBarber) {
+            this.barberService.update(barber).subscribe(barber => {
+                console.log(barber);
+            });
+
+            this.updatePicture(barber.id, this.selectedImage);
+        }
     }
 
-    updatePicture(file: File): void {
-        setTimeout(() => {
-            this.clientsService.uploadImage(file).subscribe(data => {
-                alert("Cliente salvo com sucesso");
-                window.location.reload();
-            })
-        }, 500);
+    updatePicture(id: string, file: File): void {
+        if (this.isClient) {
+            setTimeout(() => {
+                this.clientsService.uploadImage(id, file).subscribe(data => {
+                    alert("Cliente salvo com sucesso");
+                    window.location.reload();
+                })
+            }, 500);
+        } else if (this.isBarber) {
+            setTimeout(() => {
+                this.barberService.uploadImage(id, file).subscribe(data => {
+                    alert("Barbeiro salvo com sucesso");
+                    window.location.reload();
+                })
+            }, 500);
+        }
     }
 
     onSelectedImage(event: any): void {
@@ -163,11 +192,13 @@ export class ProfileComponent implements OnInit {
             let reader = new FileReader();
             reader.readAsDataURL(this.selectedImage);
             reader.onload = (e: any) => {
-                this.imageURL = e.target.result
+                const newImageURL = e.target.result;
+                this.imagePlaceHolder = newImageURL;
+                this.imageURL = newImageURL.split(",")[1];
+
             };
         }
 
-        $("[alt='image-placeholder']").attr("src", "{{imageURL}}");
         $(".file-container").removeAttr("hidden");
 
     }
