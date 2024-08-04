@@ -4,7 +4,7 @@ This project was conceptualized and developed by me as my first solo project eve
 
 ## Installation
 
-Use `npm` to install and run the project:
+Use `npm` to install and run the project locally:
 ```bash
 npm install
 npm start
