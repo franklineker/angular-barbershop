@@ -9,7 +9,7 @@ import { Barber } from 'src/app/models/barber.model';
     providedIn: 'root',
 })
 export class BarbersService {
-    baseUrl = 'http://localhost:9000/barbers';
+    baseUrl = 'http://34.29.168.109:9000/barbers';
     createOrUpdateResponse!: any;
     barberToDelete!: Barber;
     data!: any;

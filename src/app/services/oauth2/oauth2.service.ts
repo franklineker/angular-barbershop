@@ -74,7 +74,7 @@ export default class Oauth2Service {
         return result;
     }
 
-    onLogin(): void {
+    getCode(): void {
         const code_verifier = this.generateCodeVerifier();
         this.tokenService.setVerifier(code_verifier);
         this.params.code_challenge =
@@ -82,6 +82,7 @@ export default class Oauth2Service {
 
         const httpParams = new HttpParams({ fromObject: this.params });
         const codeUrl = this.authorize_uri + httpParams.toString();
+        console.log(codeUrl)
         location.href = codeUrl;
     }
 }

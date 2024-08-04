@@ -26,7 +26,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ObserversModule } from '@angular/cdk/observers';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportsComponent } from './components/views/reports/reports.component';
 import { ChairsComponent } from './components/views/chairs/chairs.component';
 import { AgmCoreModule } from '@agm/core';
@@ -82,6 +82,7 @@ import { RegisterComponent } from './components/views/register/register.componen
         }),
         OAuthModule.forRoot(),
         MatDialogModule,
+        ReactiveFormsModule
     ],
     providers: [
         OrdersComponent,
@@ -89,6 +90,7 @@ import { RegisterComponent } from './components/views/register/register.componen
         AgendaComponent,
         DeleteDialogComponent,
         ProfileComponent,
+        HeaderComponent,
         { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     ],
     bootstrap: [AppComponent],

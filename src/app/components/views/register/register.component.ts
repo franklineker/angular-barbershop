@@ -1,11 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
 import { Person } from 'src/app/models/person.model';
 import { User } from 'src/app/models/user.model';
 import { ClientsService } from 'src/app/services/clients/clients.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { HeaderComponent } from '../../templates/header/header.component';
+import Oauth2Service from 'src/app/services/oauth2/oauth2.service';
+import { TokenService } from 'src/app/services/token/token.service';
+import { environment } from 'src/environments/environment';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { data } from 'jquery';
 
 @Component({
     selector: 'app-register',
@@ -13,28 +19,48 @@ import { HeaderComponent } from '../../templates/header/header.component';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+    loginForm: FormGroup;
+    code = "";
     name!: string;
     email!: string;
     password!: string;
     confirmPassword!: string;
+    isLogged!: boolean;
+
+    // constructor(
+    //     private userService: UserService,
+    //     private router: Router,
+    //     private activatedRoute: ActivatedRoute,
+    //     private clientsService: ClientsService,
+    //     private oauth2Service: Oauth2Service,
+    //     private tokenService: TokenService
+    // ) { }
 
     constructor(
+        private formBuilder: FormBuilder,
+        private http: HttpClient,
         private userService: UserService,
         private router: Router,
+        private activatedRoute: ActivatedRoute,
         private clientsService: ClientsService,
-        private headerComponet: HeaderComponent
-    ) { }
+        private oauth2Service: Oauth2Service,
+        private tokenService: TokenService
+    ) {
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required],
+        });
+    }
 
     ngOnInit(): void {
-
+        this.getLogged()
     }
 
     onLogin(): void {
-        this.headerComponet.onLogin();
+        this.oauth2Service.getCode();
     }
 
-    onSubmit(): void {
+    onRegister(): void {
 
         let user = new User(this.name, this.email, this.password, ["CLIENT"]);
         console.log(user);
@@ -53,6 +79,19 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['']);
         })
 
+    }
+
+    getLogged(): void {
+        this.isLogged = this.tokenService.isLogged();
+    }
+
+    getToken(code: string, code_verifier: string): void {
+        this.oauth2Service.getToken(code, code_verifier).subscribe((data) => {
+            this.tokenService.setTokens(data['access_token'], data['refresh_token']);
+        }),
+            (err: any) => {
+                console.log(err);
+            };
     }
 
 }

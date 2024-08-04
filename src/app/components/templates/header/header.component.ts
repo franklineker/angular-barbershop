@@ -25,6 +25,11 @@ export class HeaderComponent implements OnInit {
         private oauth2Service: Oauth2Service
     ) { }
 
+    ngOnInit(): void {
+        this.getAdmin();
+        this.getLogged();
+    }
+
     toggleMenu(): void {
         this.main.toggleMenu();
     }
@@ -35,14 +40,8 @@ export class HeaderComponent implements OnInit {
 
     }
 
-    ngOnInit(): void {
-        this.getAdmin();
-        this.getLogged();
-    }
-
     onLogin(): void {
-        this.oauth2Service.onLogin();
-
+        this.oauth2Service.getCode();
     }
 
     onLogout(): void {

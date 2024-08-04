@@ -8,7 +8,7 @@ import { Appointment } from 'src/app/models/appointment.model';
 })
 export class AppointmentsService {
 
-    baseUrl = 'http://localhost:9000/appointments';
+    baseUrl = 'http://34.29.168.109:9000/appointments';
     appointmentToDelete!: Appointment;
 
     constructor(private http: HttpClient) { }

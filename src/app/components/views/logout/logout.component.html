@@ -1,0 +1,7 @@
+<div class="logout">
+    <form #userForm="ngForm" method="post" action="http://localhost/8080/logout">
+        <h1><br>Tem certeza que deseja sair?</h1>
+        <button (click)="onLogout()" type="submit">Sim</button>
+        <a href="http://localhost:4200"><button type="button">Não</button></a>
+    </form>
+</div>

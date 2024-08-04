@@ -10,7 +10,7 @@ import { TokenService } from '../token/token.service';
     providedIn: 'root',
 })
 export class AgendaService {
-    baseUrl = 'http://localhost:9000';
+    baseUrl = 'http://34.29.168.109:9000';
     barbers!: Barber[];
     orders!: Order[];
 

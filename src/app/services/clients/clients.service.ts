@@ -7,7 +7,7 @@ import { Client } from 'src/app/models/client.model';
     providedIn: 'root',
 })
 export class ClientsService {
-    baseUrl = 'http://localhost:9000/clients';
+    baseUrl = 'http://34.29.168.109:9000/clients';
     createOrUpdateResponse: any;
     clientToDelete!: Client;
     clientToEdit!: Client;
